@@ -19,6 +19,13 @@ router.get("/getOneInfo", async (ctx, next) => {
   ctx.body = { code: 200, info, msg: "" };
 });
 
+//获取所有用户(GET请求)
+router.get("/getAllUsers", async (ctx, next) => {
+  let select = `select id,account,avatar,userName from users`;
+  const res = await userService.query(select);
+  ctx.body = { code: 200, res, msg: "" };
+});
+
 // 更新当前用户信息(POST请求)
 router.post("/updateUserInfo", async (ctx, next) => {
   let { account, userName, avatar } = ctx.request.body;
